@@ -1,0 +1,80 @@
+OmiqID,Filename,Type,Treatment,Condition,Batch
+F156756490591483,Batch1B__Clean_Burn_CpG4.fcs,Clean,CpG,Burn,2
+F226746943456111,Batch1B__Clean_Burn_CpG5.fcs,Clean,CpG,Burn,2
+F82085049001779,Batch1B__Clean_Burn_GpC3.fcs,Clean,GpC,Burn,2
+F119947154314871,Batch1B__Clean_Burn_GpC4.fcs,Clean,GpC,Burn,2
+F152036747937066,Batch1B__Clean_Burn_GpC5.fcs,Clean,GpC,Burn,2
+F224226928646107,Batch1B__Clean_CpG3.fcs,Clean,CpG,Control,2
+F257691021641779,Batch1B__Clean_CpG4.fcs,Clean,CpG,Control,2
+F12858201386544,Batch1B__Clean_CpG5.fcs,Clean,CpG,Control,2
+F48246566257904,Batch1B__Clean_GpC4.fcs,Clean,GpC,Sham,2
+F114938998702574,Batch1B__Clean_GpC5.fcs,Clean,GpC,Sham,2
+F236635185529509,Batch1B__Dirty_Burn_CpG4.fcs,Natural Immune,CpG,Burn,2
+F272023333163186,Batch1B__Dirty_Burn_CpG5.fcs,Natural Immune,CpG,Burn,2
+F26211112356392,Batch1B__Dirty_Burn_GpC3.fcs,Natural Immune,GpC,Burn,2
+F92903716014539,Batch1B__Dirty_Burn_GpC4.fcs,Natural Immune,GpC,Burn,2
+F128292264119913,Batch1B__Dirty_Burn_GpC5.fcs,Natural Immune,GpC,Burn,2
+F162735406261478,Batch1B__Dirty_CpG3.fcs,Natural Immune,CpG,Control,2
+F198398302108963,Batch1B__Dirty_CpG4.fcs,Natural Immune,CpG,Control,2
+F268389328744536,Batch1B__Dirty_CpG5.fcs,Natural Immune,CpG,Control,2
+F123728560323902,Batch1B__Dirty_GpC4.fcs,Natural Immune,GpC,Sham,2
+F160491139985774,Batch1B__Dirty_GpC5.fcs,Natural Immune,GpC,Sham,2
+F230482821156825,Mu_CyTOF_Run1_Clean_Burn_CpG1.fcs,Clean,CpG,Burn,1
+F265870357665958,Mu_CyTOF_Run1_Clean_Burn_CpG2.fcs,Clean,CpG,Burn,1
+F18959463270617,Mu_CyTOF_Run1_Clean_Burn_CpG3.fcs,Clean,CpG,Burn,1
+F54501696520194,Mu_CyTOF_Run1_Clean_Burn_GpC1.fcs,Clean,GpC,Burn,1
+F138786584486959,Mu_CyTOF_Run1_Clean_Burn_GpC2.fcs,Clean,GpC,Burn,1
+F174175153530221,Mu_CyTOF_Run1_Clean_CpG1.fcs,Clean,CpG,Control,1
+F31988075605766,Mu_CyTOF_Run1_Clean_CpG2.fcs,Clean,CpG,Control,1
+F67376510378758,Mu_CyTOF_Run1_Clean_GpC1.fcs,Clean,GpC,Sham,1
+F136267635219907,Mu_CyTOF_Run1_Clean_GpC2.fcs,Clean,GpC,Sham,1
+F169731938759575,Mu_CyTOF_Run1_Clean_GpC3.fcs,Clean,GpC,Sham,1
+F206220060675569,Mu_CyTOF_Run1_Dirty_Burn_CpG1.fcs,Natural Immune,CpG,Burn,1
+F241762184812348,Mu_CyTOF_Run1_Dirty_Burn_CpG2.fcs,Natural Immune,CpG,Burn,1
+F30278751937162,Mu_CyTOF_Run1_Dirty_Burn_CpG3.fcs,Natural Immune,CpG,Burn,1
+F62643704064725,Mu_CyTOF_Run1_Dirty_Burn_GpC1.fcs,Natural Immune,GpC,Burn,1
+F184064842873577,Mu_CyTOF_Run1_Dirty_Burn_GpC2.fcs,Natural Immune,GpC,Burn,1
+F219727902169239,Mu_CyTOF_Run1_Dirty_CpG1.fcs,Natural Immune,CpG,Control,1
+F8244053320510,Mu_CyTOF_Run1_Dirty_CpG2.fcs,Natural Immune,CpG,Control,1
+F40333656455919,Mu_CyTOF_Run1_Dirty_GpC1.fcs,Natural Immune,GpC,Sham,1
+F78194600297841,Mu_CyTOF_Run1_Dirty_GpC2.fcs,Natural Immune,GpC,Sham,1
+F146950011676312,Mu_CyTOF_Run1_Dirty_GpC3.fcs,Natural Immune,GpC,Sham,1
+F180431095191368,Batch#2A__Clean_Burn_CpG1.fcs,Clean,CpG,Burn,3
+F215818329528018,Batch#2A__Clean_Burn_CpG2.fcs,Clean,CpG,Burn,3
+F252580674017251,Batch#2A__Clean_Burn_CpG3.fcs,Clean,CpG,Burn,3
+F142523973169975,Batch#2A__Clean_Burn_CpG4.fcs,Clean,CpG,Burn,3
+F177912141347186,Batch#2A__Clean_Burn_CpG5.fcs,Clean,CpG,Burn,3
+F212475937437955,Batch#2A__Clean_Burn_GpC1.fcs,Clean,GpC,Burn,3
+F247863028559631,Batch#2A__Clean_Burn_GpC2.fcs,Clean,GpC,Burn,3
+F36517541284406,Batch#2A__Clean_Burn_GpC3.fcs,Clean,GpC,Burn,3
+F86215309906896,Batch#2A__Clean_Burn_GpC4.fcs,Clean,GpC,Burn,3
+F121878784537509,Batch#2A__Clean_Burn_GpC5.fcs,Clean,GpC,Burn,3
+F156167542351712,Batch#2A__Clean_CpG1.fcs,Clean,CpG,Control,3
+F47209838453423,Batch#2A__Clean_CpG2.fcs,Clean,CpG,Control,3
+F81773938580683,Batch#2A__Clean_CpG3.fcs,Clean,CpG,Control,3
+F117160524957287,Batch#2A__Clean_CpG4.fcs,Clean,CpG,Control,3
+F153923120994679,Batch#2A__Clean_CpG5.fcs,Clean,CpG,Control,3
+F223778366573514,Batch#2A__Clean_GpC1.fcs,Clean,GpC,Sham,3
+F259456852638123,Batch#2A__Clean_GpC2.fcs,Clean,GpC,Sham,3
+F12271200010813,Batch#2A__Clean_GpC3.fcs,Clean,GpC,Sham,3
+F80200047603067,Batch#2A__Clean_GpC4.fcs,Clean,GpC,Sham,3
+F201760188313910,Batch#2A__Dirty_GpC1.fcs,Natural Immune,GpC,Sham,3
+F233850155154349,Batch#2B__Dirty_Burn_CpG1.fcs,Natural Immune,CpG,Burn,4
+F271710612158099,Batch#2B__Dirty_Burn_CpG2.fcs,Natural Immune,CpG,Burn,4
+F57891677632867,Batch#2B__Dirty_Burn_CpG3.fcs,Natural Immune,CpG,Burn,4
+F92453472241459,Batch#2B__Dirty_Burn_CpG4.fcs,Natural Immune,CpG,Burn,4
+F127859278002178,Batch#2B__Dirty_Burn_CpG5.fcs,Natural Immune,CpG,Burn,4
+F164622245024807,Batch#2B__Dirty_Burn_GpC1.fcs,Natural Immune,GpC,Burn,4
+F234477176729408,Batch#2B__Dirty_Burn_GpC2.fcs,Natural Immune,GpC,Burn,4
+F89951775629883,Batch#2B__Dirty_Burn_GpC3.fcs,Natural Immune,GpC,Burn,4
+F123417914684531,Batch#2B__Dirty_Burn_GpC4.fcs,Natural Immune,GpC,Burn,4
+F159905616638003,Batch#2B__Dirty_Burn_GpC5.fcs,Natural Immune,GpC,Burn,4
+F230032121031654,Batch#2B__Dirty_CpG1.fcs,Natural Immune,CpG,Control,4
+F265422279974577,Batch#2B__Dirty_CpG2.fcs,Natural Immune,CpG,Control,4
+F33921372477229,Batch#2B__Dirty_CpG3.fcs,Natural Immune,CpG,Control,4
+F53916244409635,Batch#2B__Dirty_CpG4.fcs,Natural Immune,CpG,Control,4
+F140537656898194,Batch#2B__Dirty_CpG5.fcs,Natural Immune,CpG,Control,4
+F275288243468996,Batch#2B__Dirty_GpC2.fcs,Natural Immune,GpC,Sham,4
+F29203524745829,Batch#2B__Dirty_GpC3.fcs,Natural Immune,GpC,Sham,4
+F99329911992039,Batch#2B__Dirty_GpC4.fcs,Natural Immune,GpC,Sham,4
+F135819604292038,Batch#2B__Dirty_GpC5.fcs,Natural Immune,GpC,Sham,4
