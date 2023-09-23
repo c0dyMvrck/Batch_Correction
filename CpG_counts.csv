@@ -1,0 +1,80 @@
+file,live cells|count,Batch,Condition,Treatment,Type
+Batch1B__Clean_Burn_CpG4.fcs,33774,2,Burn,CpG,Clean
+Batch1B__Clean_Burn_CpG5.fcs,31673,2,Burn,CpG,Clean
+Batch1B__Clean_Burn_GpC3.fcs,111557,2,Burn,GpC,Clean
+Batch1B__Clean_Burn_GpC4.fcs,102482,2,Burn,GpC,Clean
+Batch1B__Clean_Burn_GpC5.fcs,108816,2,Burn,GpC,Clean
+Batch1B__Clean_CpG3.fcs,80995,2,NA,CpG,Clean
+Batch1B__Clean_CpG4.fcs,115392,2,NA,CpG,Clean
+Batch1B__Clean_CpG5.fcs,41840,2,NA,CpG,Clean
+Batch1B__Clean_GpC4.fcs,100972,2,NA,GpC,Clean
+Batch1B__Clean_GpC5.fcs,118549,2,NA,GpC,Clean
+Batch1B__Dirty_Burn_CpG4.fcs,42757,2,Burn,CpG,Natural Immune
+Batch1B__Dirty_Burn_CpG5.fcs,50250,2,Burn,CpG,Natural Immune
+Batch1B__Dirty_Burn_GpC3.fcs,81911,2,Burn,GpC,Natural Immune
+Batch1B__Dirty_Burn_GpC4.fcs,104109,2,Burn,GpC,Natural Immune
+Batch1B__Dirty_Burn_GpC5.fcs,47269,2,Burn,GpC,Natural Immune
+Batch1B__Dirty_CpG3.fcs,82321,2,NA,CpG,Natural Immune
+Batch1B__Dirty_CpG4.fcs,71404,2,NA,CpG,Natural Immune
+Batch1B__Dirty_CpG5.fcs,84200,2,NA,CpG,Natural Immune
+Batch1B__Dirty_GpC4.fcs,143912,2,NA,GpC,Natural Immune
+Batch1B__Dirty_GpC5.fcs,53487,2,NA,GpC,Natural Immune
+Mu_CyTOF_Run1_Clean_Burn_CpG1.fcs,43473,1,Burn,CpG,Clean
+Mu_CyTOF_Run1_Clean_Burn_CpG2.fcs,103238,1,Burn,CpG,Clean
+Mu_CyTOF_Run1_Clean_Burn_CpG3.fcs,74376,1,Burn,CpG,Clean
+Mu_CyTOF_Run1_Clean_Burn_GpC1.fcs,125396,1,Burn,GpC,Clean
+Mu_CyTOF_Run1_Clean_Burn_GpC2.fcs,76653,1,Burn,GpC,Clean
+Mu_CyTOF_Run1_Clean_CpG1.fcs,48499,1,NA,CpG,Clean
+Mu_CyTOF_Run1_Clean_CpG2.fcs,55681,1,NA,CpG,Clean
+Mu_CyTOF_Run1_Clean_GpC1.fcs,100770,1,NA,GpC,Clean
+Mu_CyTOF_Run1_Clean_GpC2.fcs,93596,1,NA,GpC,Clean
+Mu_CyTOF_Run1_Clean_GpC3.fcs,12138,1,NA,GpC,Clean
+Mu_CyTOF_Run1_Dirty_Burn_CpG1.fcs,72442,1,Burn,CpG,Natural Immune
+Mu_CyTOF_Run1_Dirty_Burn_CpG2.fcs,77108,1,Burn,CpG,Natural Immune
+Mu_CyTOF_Run1_Dirty_Burn_CpG3.fcs,54273,1,Burn,CpG,Natural Immune
+Mu_CyTOF_Run1_Dirty_Burn_GpC1.fcs,129611,1,Burn,GpC,Natural Immune
+Mu_CyTOF_Run1_Dirty_Burn_GpC2.fcs,126450,1,Burn,GpC,Natural Immune
+Mu_CyTOF_Run1_Dirty_CpG1.fcs,36502,1,NA,CpG,Natural Immune
+Mu_CyTOF_Run1_Dirty_CpG2.fcs,85556,1,NA,CpG,Natural Immune
+Mu_CyTOF_Run1_Dirty_GpC1.fcs,118653,1,NA,GpC,Natural Immune
+Mu_CyTOF_Run1_Dirty_GpC2.fcs,172808,1,NA,GpC,Natural Immune
+Mu_CyTOF_Run1_Dirty_GpC3.fcs,113590,1,NA,GpC,Natural Immune
+Batch#2A__Clean_Burn_CpG1.fcs,44338,3,Burn,CpG,Clean
+Batch#2A__Clean_Burn_CpG2.fcs,62924,3,Burn,CpG,Clean
+Batch#2A__Clean_Burn_CpG3.fcs,152118,3,Burn,CpG,Clean
+Batch#2A__Clean_Burn_CpG4.fcs,89255,3,Burn,CpG,Clean
+Batch#2A__Clean_Burn_CpG5.fcs,107420,3,Burn,CpG,Clean
+Batch#2A__Clean_Burn_GpC1.fcs,41966,3,Burn,GpC,Clean
+Batch#2A__Clean_Burn_GpC2.fcs,51691,3,Burn,GpC,Clean
+Batch#2A__Clean_Burn_GpC3.fcs,60175,3,Burn,GpC,Clean
+Batch#2A__Clean_Burn_GpC4.fcs,72170,3,Burn,GpC,Clean
+Batch#2A__Clean_Burn_GpC5.fcs,67599,3,Burn,GpC,Clean
+Batch#2A__Clean_CpG1.fcs,130447,3,NA,CpG,Clean
+Batch#2A__Clean_CpG2.fcs,63216,3,NA,CpG,Clean
+Batch#2A__Clean_CpG3.fcs,34941,3,NA,CpG,Clean
+Batch#2A__Clean_CpG4.fcs,126486,3,NA,CpG,Clean
+Batch#2A__Clean_CpG5.fcs,114056,3,NA,CpG,Clean
+Batch#2A__Clean_GpC1.fcs,71999,3,NA,GpC,Clean
+Batch#2A__Clean_GpC2.fcs,112928,3,NA,GpC,Clean
+Batch#2A__Clean_GpC3.fcs,119316,3,NA,GpC,Clean
+Batch#2A__Clean_GpC4.fcs,106484,3,NA,GpC,Clean
+Batch#2A__Dirty_GpC1.fcs,146563,3,NA,GpC,Natural Immune
+Batch#2B__Dirty_Burn_CpG1.fcs,77644,4,Burn,CpG,Natural Immune
+Batch#2B__Dirty_Burn_CpG2.fcs,73713,4,Burn,CpG,Natural Immune
+Batch#2B__Dirty_Burn_CpG3.fcs,116271,4,Burn,CpG,Natural Immune
+Batch#2B__Dirty_Burn_CpG4.fcs,75049,4,Burn,CpG,Natural Immune
+Batch#2B__Dirty_Burn_CpG5.fcs,79403,4,Burn,CpG,Natural Immune
+Batch#2B__Dirty_Burn_GpC1.fcs,188124,4,Burn,GpC,Natural Immune
+Batch#2B__Dirty_Burn_GpC2.fcs,152014,4,Burn,GpC,Natural Immune
+Batch#2B__Dirty_Burn_GpC3.fcs,125561,4,Burn,GpC,Natural Immune
+Batch#2B__Dirty_Burn_GpC4.fcs,130967,4,Burn,GpC,Natural Immune
+Batch#2B__Dirty_Burn_GpC5.fcs,156552,4,Burn,GpC,Natural Immune
+Batch#2B__Dirty_CpG1.fcs,93099,4,NA,CpG,Natural Immune
+Batch#2B__Dirty_CpG2.fcs,72352,4,NA,CpG,Natural Immune
+Batch#2B__Dirty_CpG3.fcs,81504,4,NA,CpG,Natural Immune
+Batch#2B__Dirty_CpG4.fcs,92227,4,NA,CpG,Natural Immune
+Batch#2B__Dirty_CpG5.fcs,75577,4,NA,CpG,Natural Immune
+Batch#2B__Dirty_GpC2.fcs,89701,4,NA,GpC,Natural Immune
+Batch#2B__Dirty_GpC3.fcs,84766,4,NA,GpC,Natural Immune
+Batch#2B__Dirty_GpC4.fcs,60413,4,NA,GpC,Natural Immune
+Batch#2B__Dirty_GpC5.fcs,64904,4,NA,GpC,Natural Immune

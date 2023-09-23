@@ -1,0 +1,36 @@
+---
+title: "Batch effects_CpG"
+author: "Katya Murzin"
+date: "2023-08-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load packages
+
+```{r}
+library(tidyverse)
+library(cyCombine)
+```
+
+```{r}
+data_dir <- "V:/data/CyTOF Data/CpG-GpC Burn Mu Blood TL/Debarcoded & QCd for CyCombine"
+metadata_dir <- "V:/data/CyTOF Data/CpG-GpC Burn Mu Blood TL/metadata.csv"
+#markers <- c("Arginase", "B220/CD45R", "TER-119", "CD16/32", "CD4", "CD44", "CD8a", "CD45", "ASC/PYCARD", "Ly6G", "CCR1", "CD14", "Ly6C", "CD3", "CD152", "CD103", "CD68", "CD19", "CD186", "T-bet", "CD206", "Sca-1", "CD83", "FoxP3", "NK1.1", "Ki-67", "CD115", "CD86", "CD25", "CD117", "PU.1", "CD278", "CD279", "CD192", "CD69", "CD11b", "F4/80", "IL-23R", "Caspase-1", "CD5", "CD127", "CD34", "I-A/I-e (MHC-II)")
+
+
+```
+
+```{r}
+cytof_data <- prepare_data(data_dir = data_dir,
+                           metadata = metadata_dir,
+                           filename_col = "Filename",
+                           batch_ids = "Batch",
+                           condition = "Condition",
+                           derand = TRUE,
+                           markers = markers,
+                           down_sample = FALSE)
+```

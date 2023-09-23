@@ -1,0 +1,114 @@
+---
+title: "Batch effects_CpG"
+author: "Katya Murzin"
+date: "2023-08-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Load packages
+```{r}
+sts <- Sys.time()
+library(tidyverse)
+library(cyCombine)
+```
+
+```{r}
+CpG_Live_Cts <- read_csv("CpG_counts.csv",
+                       lazy = F)
+CpG_Live_Cts$Batch <- factor(CpG_Live_Cts$Batch, levels = unique(CpG_Live_Cts$Batch))
+colnames(CpG_Live_Cts) <- make.names(colnames(CpG_Live_Cts))
+CpG_Live_MD <- CpG_Live_Cts %>% select(file, Batch, Condition, Treatment, Type)
+
+```
+checked 4/20
+```{r}
+CpG_Live_Cells <- read_csv("CpG_all.csv",
+                        lazy = F)
+marker_names_pre <- colnames(CpG_Live_Cells)
+colnames(CpG_Live_Cells)[8:78] <- sapply(colnames(CpG_Live_Cells)[8:78], function(x){strsplit(x, "___")[[1]][2]})
+colnames(CpG_Live_Cells)[79] <- "file"
+colnames(CpG_Live_Cells) <- make.names(colnames(CpG_Live_Cells))
+markers <- colnames(CpG_Live_Cells)[c(9,18:23,33:68, 73:76, 78)]
+CpG_Live_Cells <- merge(CpG_Live_MD, CpG_Live_Cells, by = "file", all.y = T)
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Batch))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Condition))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Treatment))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Type))]
+```
+
+checked 4/20
+```{r}
+CpG_Live_Cells[,8:78] <- transform_asinh(CpG_Live_Cells[,8:78])
+```
+ 
+checked 4/20
+```{r}
+colnames(CpG_Live_Cells)[2] <- "batch"
+colnames(CpG_Live_Cells)[1] <- "sample"
+detect_batch_effect(CpG_Live_Cells[c(1, 2, 12, 21:26, 36:71, 76:79, 81)], out_dir = getwd(), markers = markers)
+```
+
+
+```{r}
+corrected <- batch_correct(CpG_Live_Cells, covar = CpG_Live_Cells$Condition, markers = markers)
+```
+
+
+```{r}
+densplt <- plot_density(CpG_Live_Cells, corrected, ncol = 5, markers = markers)
+```
+
+```{r}
+labels <- corrected %>% 
+  create_som(markers = markers,
+             rlen = 10)
+CpG_Live_Cells$label <- corrected$label <- labels
+CpG_Live_Cells$id <- corrected$id
+emd <- evaluate_emd(uncorrected = CpG_Live_Cells, corrected = corrected, markers = markers, cell_col = "label")
+```
+
+```{r}
+mad <- evaluate_mad(uncorrected = CpG_Live_Cells, corrected = corrected, markers = markers, cell_col = "label")
+```
+
+```{r}
+emdviol <- emd$violin
+
+emdscatter <- emd$scatter
+
+emdred <- emd$reduction
+
+emddat <- emd$emd
+```
+
+```{r}
+unscale <- function(x){
+  sinh(x)*5
+}
+unscaled <- corrected
+unscaled[,c(3:50,61:83)] <- sapply(corrected[,c(3:50,61:83)], unscale)
+```
+
+
+```{r}
+final <- split(unscaled, unscaled$batch)
+```
+
+```{r}
+for(i in 1:length(final)){
+  tbl <- final[[i]]
+  path <- paste0(getwd(),"/scaled/", names(final[i]), ".csv")
+  write_csv(tbl[,c(3:50,61:83)], file = path)
+}
+```
+
+
+```{r}
+ent <- Sys.time()
+ent-sts
+```
