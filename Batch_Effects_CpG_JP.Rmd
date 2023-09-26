@@ -15,7 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tictoc)
 library(tidyverse)
 library(cyCombine)
-library(arrow)
+library(emdist)
+library(readr)
+#library(arrow)
 tic(msg = "start compute time")
 ```
 
@@ -34,7 +36,7 @@ Chunk5- dataset is quite large (4.2GBs), long load time on local machine.
 Consider modulating as an arrow object. Need to consider how this impacts data 
 format, if at all. 
 
- -------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ```{r}
 CpG_Live_Cts <- read_csv("CpG_counts.csv",
@@ -63,8 +65,22 @@ CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Type))]
 ##Import Data With Arrow--------------------------------------------------------
 ```{r importwitharrow}
 CpG_Live_Cells <- read_csv_arrow(here::here("CpG_all.csv"))
+toc()
 ```
 Even import entire dataset with arrow function is considerably faster. 
+## Import without Arrow---------------------------------------------------------
+
+```{r}
+tic(msg = "Start Import CSV")
+
+CpG_Live_Cells <-read.csv(here::here("CpG_all.csv"))
+
+toc()
+```
+##Note Show in New Window
+Start Import CSV: 1022.426 sec elapsed
+
+
 
 ```{r}
 colnames(CpG_Live_Cells)[8:78] <- sub("___", "/", colnames(CpG_Live_Cells[8:78]))
@@ -108,7 +124,7 @@ CpG_Live_Cts |>
 Need to double check the number of samples from each group. Sham Has 19, which 
 makes sense because we lost one mouse to infection before harvest. 
 
- -------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 
 checked 4/20
@@ -118,24 +134,31 @@ CpG_Live_Cells[, c(14,23:28,38:73,78:81,83)] <- transform_asinh(CpG_Live_Cells[,
  
 checked 4/20
 ```{r}
+tic(msg = "Detect Batch Effects")
 colnames(CpG_Live_Cells)[2] <- "batch"
 colnames(CpG_Live_Cells)[1] <- "sample"
 detect_batch_effect(CpG_Live_Cells[c(1, 2, 14, 23:28,38:73,78:81,83)], out_dir = getwd(), markers = markers)
+toc()
 ```
+
+##Note----9/29/2023-------------------------------------------------------------
+Detect Batch effects function works. Total elapsed time = 713.63 secs (11 min)
 
 ##Note----9/23/23---------------------------------------------------------------
 error while running: 
   -vectore memory exhausted (limit reached?)
-  Have not run into this mefore. Will hvae to run analysis on RStudio Pro Server
+  Have not run into this before. Will have to run analysis on RStudio Pro Server
 Copy github repsoitory and load in data. 
   -Could potentially save as a parquet file and load into github. 
   -again may effect data structure. 
 
- -------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 
 ```{r}
+tic(msg = "Correct Batch Effects")
 corrected <- batch_correct(CpG_Live_Cells, covar = CpG_Live_Cells$Condition, markers = markers)
+toc()
 ```
 
 
