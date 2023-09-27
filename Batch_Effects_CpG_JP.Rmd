@@ -17,6 +17,7 @@ library(tidyverse)
 library(cyCombine)
 library(emdist)
 library(readr)
+library(sva)
 #library(arrow)
 tic(msg = "start compute time")
 ```
@@ -35,6 +36,18 @@ Removed NAs and updated conditions groups
 Chunk5- dataset is quite large (4.2GBs), long load time on local machine. 
 Consider modulating as an arrow object. Need to consider how this impacts data 
 format, if at all. 
+
+##-To-Do/Edits-to-make----------------------------------------------------------
+Modify outpaths for saving denspplots and Umaps. 
+
+Discuss and potentially modify the condition groups for metadata. 
+
+Reference AMP batch correction script to determine the correct covariates to 
+correct for. 
+  -Covariate for Amp is Disease not any treatment. Seems comparable to run 
+  Condition as covariate to crrect for in this dataset. 
+
+Run benchmarking on the corrected datasets
 
 --------------------------------------------------------------------------------
 
@@ -144,6 +157,15 @@ toc()
 ##Note----9/29/2023-------------------------------------------------------------
 Detect Batch effects function works. Total elapsed time = 713.63 secs (11 min)
 
+Results from 9.29
+There are 0 markers that appear to be outliers in a single batch:
+
+There are 0 clusters, in which a single cluster is strongly over- or 
+underrepresented.
+Making UMAP plots for up to 50,000 cells.
+
+
+
 ##Note----9/23/23---------------------------------------------------------------
 error while running: 
   -vectore memory exhausted (limit reached?)
@@ -160,10 +182,20 @@ tic(msg = "Correct Batch Effects")
 corrected <- batch_correct(CpG_Live_Cells, covar = CpG_Live_Cells$Condition, markers = markers)
 toc()
 ```
+##Note-----9/27/2023------------------------------------------------------------
+correct batch effects function works. 
+Time elapsed: 553.278 sec elapsed
 
+
+Appears to be very little batch effects to correct for. Need to make sure not 
+due to lack of controls or inaccurate conditions. 
+
+--------------------------------------------------------------------------------
 
 ```{r}
-densplt <- plot_density(CpG_Live_Cells, corrected, ncol = 5, markers = markers)
+tic(msg = "Densplt start")
+densplt <- plot_density(CpG_Live_Cells, corrected, ncol = 5, markers = markers, filename = here::here("Densplot_9_26_23.pdf"))
+toc()
 ```
 
 ```{r}
@@ -178,8 +210,13 @@ emd <- evaluate_emd(uncorrected = CpG_Live_Cells, corrected = corrected, markers
 ```{r}
 mad <- evaluate_mad(uncorrected = CpG_Live_Cells, corrected = corrected, markers = markers, cell_col = "label")
 ```
+##MAD results-------9/27/2023---------------------------------------------------
+The MAD score is: 0.01
 
-```{r}
+--------------------------------------------------------------------------------
+
+
+```{r, include = TRUE}
 emdviol <- emd$violin
 
 emdscatter <- emd$scatter
@@ -194,10 +231,15 @@ unscale <- function(x){
   sinh(x)*5
 }
 unscaled <- corrected
-unscaled[,c(3:50,61:83)] <- sapply(corrected[,c(3:50,61:83)], unscale)
+unscaled[,c(3:50)] <- sapply(corrected[,c(3:50)], unscale)
 ```
 
 
+## Note---9/27/2023-------------------------------------------------------------
+chunk below will cause files to be written by batch. If want files written by 
+sample then change unscaled$batch to unscaled$sample
+
+--------------------------------------------------------------------------------
 ```{r}
 final <- split(unscaled, unscaled$batch)
 ```
@@ -205,13 +247,8 @@ final <- split(unscaled, unscaled$batch)
 ```{r}
 for(i in 1:length(final)){
   tbl <- final[[i]]
-  path <- paste0(getwd(),"/scaled/", names(final[i]), ".csv")
-  write_csv(tbl[,c(3:50,61:83)], file = path)
+  path <- paste0(here::here(),"/Corrected_R1_9_27/", names(final[i]), ".csv")
+  write_csv(tbl[,c(3:85)], file = path)
 }
 ```
 
-
-```{r}
-ent <- Sys.time()
-ent-sts
-```
