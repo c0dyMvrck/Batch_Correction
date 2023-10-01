@@ -1,0 +1,194 @@
+---
+title: "Batch effects_CpG_JP_V1"
+author: "Katya Murzin", "Jack Pulford"
+date: "2023-08-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Load packages
+```{r}
+library(tictoc)
+library(tidyverse)
+library(cyCombine)
+library(arrow)
+tic(msg = "start compute time")
+```
+
+## Notes------------------------------------------------------------------------
+chunk4-CpG_Live_Cts object has NA values at the following positions. 
+```{R findNA, include = TRUE}
+which(is.na(CpG_Live_Cts), arr.ind=TRUE)
+``` 
+Do not know if this impacts analyses or is a known issue. 
+
+Removed NAs and updated conditions groups 
+  -CpG/NoBurn = Control 
+  -GpC/NoBurn = Sham
+  
+Chunk5- dataset is quite large (4.2GBs), long load time on local machine. 
+Consider modulating as an arrow object. Need to consider how this impacts data 
+format, if at all. 
+
+ -------------------------------------------------------------------------------
+
+```{r}
+CpG_Live_Cts <- read_csv("CpG_counts.csv",
+                       lazy = F)
+CpG_Live_Cts$Batch <- factor(CpG_Live_Cts$Batch, levels = unique(CpG_Live_Cts$Batch))
+colnames(CpG_Live_Cts) <- make.names(colnames(CpG_Live_Cts))
+CpG_Live_MD <- CpG_Live_Cts %>% select(file, Batch, Condition, Treatment, Type)
+
+```
+checked 4/20
+```{r}
+CpG_Live_Cells <- read_csv("CpG_all.csv",
+                        lazy = F)
+marker_names_pre <- colnames(CpG_Live_Cells)
+colnames(CpG_Live_Cells)[8:78] <- sapply(colnames(CpG_Live_Cells)[8:78], function(x){strsplit(x, "___")[[1]][2]})
+colnames(CpG_Live_Cells)[79] <- "file"
+colnames(CpG_Live_Cells) <- make.names(colnames(CpG_Live_Cells))
+markers <- colnames(CpG_Live_Cells)[c(9,18:23,33:68, 73:76, 78)]
+CpG_Live_Cells <- merge(CpG_Live_MD, CpG_Live_Cells, by = "file", all.y = T)
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Batch))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Condition))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Treatment))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Type))]
+```
+
+##Import Data With Arrow--------------------------------------------------------
+```{r importwitharrow}
+CpG_Live_Cells <- read_csv_arrow(here::here("CpG_all.csv"))
+```
+Even import entire dataset with arrow function is considerably faster. 
+
+```{r}
+colnames(CpG_Live_Cells)[8:78] <- sub("___", "/", colnames(CpG_Live_Cells[8:78]))
+colnames(CpG_Live_Cells)[8:78] <-gsub("\\/.*", "", colnames(CpG_Live_Cells[8:78]))
+```
+
+
+
+```{r cleanupdata1, include=FALSE}
+marker_names_pre <- colnames(CpG_Live_Cells)
+#colnames(CpG_Live_Cells)[8:78] <- sapply(colnames(CpG_Live_Cells)[8:78], function(x){strsplit(x, "___")[[1]][2]})
+colnames(CpG_Live_Cells)[79] <- "file"
+colnames(CpG_Live_Cells) <- make.names(colnames(CpG_Live_Cells))
+markers <- colnames(CpG_Live_Cells)[c(9,18:23,33:68, 73:76, 78)]
+CpG_Live_Cells <- merge(CpG_Live_MD, CpG_Live_Cells, by = "file", all.y = T)
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Batch))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Condition))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Treatment))]
+CpG_Live_Cells$file[which(is.na(CpG_Live_Cells$Type))]
+```
+
+condition is the only MD with NA. 
+Updated groups missing medata values 
+  -CpG/NoBurn = Control 
+  -GpC/NoBurn = Sham 
+
+```{r}
+CpG_Live_Cells |> 
+  head()
+```
+
+```{r conditionQC, include = TRUE}
+CpG_Live_Cts |>
+  group_by(Condition) |>
+  summarise(
+    patient_group_counts = n()
+  ) |>
+  collect()
+```
+
+Need to double check the number of samples from each group. Sham Has 19, which 
+makes sense because we lost one mouse to infection before harvest. 
+
+ -------------------------------------------------------------------------------
+
+
+checked 4/20
+```{r}
+CpG_Live_Cells[, c(14,23:28,38:73,78:81,83)] <- transform_asinh(CpG_Live_Cells[, c(14, 23:28,38:73,78:81,83)])
+```
+ 
+checked 4/20
+```{r}
+colnames(CpG_Live_Cells)[2] <- "batch"
+colnames(CpG_Live_Cells)[1] <- "sample"
+detect_batch_effect(CpG_Live_Cells[c(1, 2, 14, 23:28,38:73,78:81,83)], out_dir = getwd(), markers = markers)
+```
+
+##Note----9/23/23---------------------------------------------------------------
+error while running: 
+  -vectore memory exhausted (limit reached?)
+  Have not run into this mefore. Will hvae to run analysis on RStudio Pro Server
+Copy github repsoitory and load in data. 
+  -Could potentially save as a parquet file and load into github. 
+  -again may effect data structure. 
+
+ -------------------------------------------------------------------------------
+
+
+```{r}
+corrected <- batch_correct(CpG_Live_Cells, covar = CpG_Live_Cells$Condition, markers = markers)
+```
+
+
+```{r}
+densplt <- plot_density(CpG_Live_Cells, corrected, ncol = 5, markers = markers)
+```
+
+```{r}
+labels <- corrected %>% 
+  create_som(markers = markers,
+             rlen = 10)
+CpG_Live_Cells$label <- corrected$label <- labels
+CpG_Live_Cells$id <- corrected$id
+emd <- evaluate_emd(uncorrected = CpG_Live_Cells, corrected = corrected, markers = markers, cell_col = "label")
+```
+
+```{r}
+mad <- evaluate_mad(uncorrected = CpG_Live_Cells, corrected = corrected, markers = markers, cell_col = "label")
+```
+
+```{r}
+emdviol <- emd$violin
+
+emdscatter <- emd$scatter
+
+emdred <- emd$reduction
+
+emddat <- emd$emd
+```
+
+```{r}
+unscale <- function(x){
+  sinh(x)*5
+}
+unscaled <- corrected
+unscaled[,c(3:50,61:83)] <- sapply(corrected[,c(3:50,61:83)], unscale)
+```
+
+
+```{r}
+final <- split(unscaled, unscaled$batch)
+```
+
+```{r}
+for(i in 1:length(final)){
+  tbl <- final[[i]]
+  path <- paste0(getwd(),"/scaled/", names(final[i]), ".csv")
+  write_csv(tbl[,c(3:50,61:83)], file = path)
+}
+```
+
+
+```{r}
+ent <- Sys.time()
+ent-sts
+```
